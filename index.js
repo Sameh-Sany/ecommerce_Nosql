@@ -12,6 +12,8 @@ const RouteNotFoundError = require("./src/utils/RouteNotFoundError");
 // import routes
 const uploadRoutes = require("./src/routes/upload.route");
 const authRoutes = require("./src/routes/auth.route");
+const productRoutes = require("./src/routes/product.route");
+const categoryRoutes = require("./src/routes/category.route");
 
 // use middleware
 app.use(morgan("dev"));
@@ -21,10 +23,11 @@ app.use(express.json());
 
 // use routes
 app.use("/api", uploadRoutes);
-app.use("/api", authRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/categories", categoryRoutes);
 
 // error handling middleware
-
 app.use("*", (req, res, next) => {
   next(
     new RouteNotFoundError(
